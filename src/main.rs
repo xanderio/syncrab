@@ -18,7 +18,7 @@ async fn restore_or_login(user_id: &UserId, client: &Client) -> Result<()> {
         // there is no session to reuse, create a new one and save it
         tracing::info!("no session found, login in as {user_id}");
         client
-            .login(user_id, &env::var("PASSWORD")?, None, None)
+            .login(user_id, &CONFIG.synapse.password, None, None)
             .await?;
 
         let session = client
